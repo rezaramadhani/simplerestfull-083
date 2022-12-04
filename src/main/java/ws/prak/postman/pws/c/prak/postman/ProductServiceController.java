@@ -44,11 +44,12 @@ public class ProductServiceController{
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
          if(!productRepo.containsKey(id)){
            return new ResponseEntity<>("Product key belum ada", HttpStatus.OK);
-         }
-      productRepo.remove(id);
-      product.setId(id);
-      productRepo.put(id, product);
-      return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
+         }else{
+           productRepo.remove(id);
+           product.setId(id);
+           productRepo.put(id, product);
+           return new ResponseEntity<>("Product is updated Successfully", HttpStatus.OK);
+       }
    }
    @RequestMapping(value = "/products", method = RequestMethod.POST)
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
