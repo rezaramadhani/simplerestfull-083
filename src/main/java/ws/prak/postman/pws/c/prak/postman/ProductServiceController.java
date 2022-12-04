@@ -55,5 +55,10 @@ public class ProductServiceController{
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
         if (productRepo.containsKey(product.getId())){
            return new ResponseEntity<>("Product key tidak bisa diduplikasi", HttpStatus.OK);
-        }
+        }else{
+           productRepo.put(product.getId(), product);
+           return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+       }
+   }
+}
     
