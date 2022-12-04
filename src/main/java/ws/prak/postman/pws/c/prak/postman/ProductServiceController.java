@@ -54,11 +54,15 @@ public class ProductServiceController{
    @RequestMapping(value = "/products", method = RequestMethod.POST)
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
         if (productRepo.containsKey(product.getId())){
-           return new ResponseEntity<>("Product key tidak bisa diduplikasi", HttpStatus.OK);
+           return new ResponseEntity<>("Product key cannot duplicated", HttpStatus.OK);
         }else{
            productRepo.put(product.getId(), product);
            return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
        }
    }
+
+     @RequestMapping(value = "/products")
+   public ResponseEntity<Object> getProduct() {
+      return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
+   }
 }
-    
