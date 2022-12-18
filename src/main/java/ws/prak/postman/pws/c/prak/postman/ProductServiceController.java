@@ -38,12 +38,13 @@ public class ProductServiceController{
         almond.setPrice("Rp 40.000");
         productRepo.put(almond.getId(), almond);
     }
-    
+    //Method DELETE digunakan apabila kita akan menghapus data yang telah ada dengan menggunakan parameter Id sebagai selectornya
     @RequestMapping(value ="/products/{id}", method = RequestMethod.DELETE)
     public ResponseEntity <Object> delete(@PathVariable("id") String id){
         productRepo.remove(id);
         return new ResponseEntity<>("Product is deleted successfully", HttpStatus.OK);
     }
+    //Method PUT digunakan apabila kita akan mengubah data yang telah ada dengan menggunakan parameter Id sebagai selectornya
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
          if(!productRepo.containsKey(id)){
@@ -55,6 +56,7 @@ public class ProductServiceController{
            return new ResponseEntity<>("Product is updated Successfully", HttpStatus.OK);
        }
    }
+   //Method POST digunakan apabila kita akan menambahkan data ke dalam server
    @RequestMapping(value = "/products", method = RequestMethod.POST)
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
         if (productRepo.containsKey(product.getId())){
