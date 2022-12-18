@@ -59,6 +59,7 @@ public class ProductServiceController{
    //Method POST digunakan apabila kita akan menambahkan data ke dalam server
    @RequestMapping(value = "/products", method = RequestMethod.POST)
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+       //membuat fungsi agar id tidak dapat menambahkan data dengan id yang sama
         if (productRepo.containsKey(product.getId())){
            return new ResponseEntity<>("Product key cannot duplicated", HttpStatus.OK);
         }else{
